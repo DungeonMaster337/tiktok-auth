@@ -3,614 +3,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ContentManager_Auto — Professional TikTok Content Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>ContentManager_Auto — Automate Your TikTok Workflow</title>
+<meta name="description" content="ContentManager_Auto is a professional content orchestration platform for marketing teams and digital agencies to automate video publishing to TikTok via the official Content Posting API.">
 <style>
   :root {
-    --black: #0a0a0a;
-    --white: #f5f3ee;
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --text: #f0f0f0;
+    --text-dim: #9a9a9a;
     --accent: #ff2d55;
-    --accent2: #00d4ff;
-    --gray: #1a1a1a;
-    --gray2: #2a2a2a;
-    --text-muted: #888;
+    --accent-soft: rgba(255, 45, 85, 0.12);
+    --border: #262626;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
     overflow-x: hidden;
   }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 48px;
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
-
-  .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.5px;
-  }
-
-  .logo span { color: var(--accent); }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 36px;
-  }
-
-  nav ul a {
-    color: var(--text-muted);
+  .brand { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+  .brand span { color: var(--accent); }
+  nav a {
+    color: var(--text-dim);
     text-decoration: none;
+    margin-left: 32px;
     font-size: 14px;
-    font-weight: 400;
-    transition: color 0.2s;
+    transition: color 0.15s;
   }
+  nav a:hover { color: var(--text); }
 
-  nav ul a:hover { color: var(--white); }
-
-  /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
+    padding: 100px 48px 120px;
+    max-width: 1280px;
+    margin: 0 auto;
   }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(255,45,85,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,45,85,0.12);
-    border: 1px solid rgba(255,45,85,0.3);
+  .tag {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
     color: var(--accent);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 100px;
+    background: var(--accent-soft);
     margin-bottom: 32px;
-    width: fit-content;
   }
-
-  .hero-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+  .tag::before {
+    content: "● ";
+    font-size: 10px;
+    vertical-align: middle;
   }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
+  h1.hero-title {
+    font-size: clamp(56px, 9vw, 140px);
     font-weight: 800;
-    font-size: clamp(48px, 7vw, 96px);
+    letter-spacing: -0.04em;
     line-height: 0.95;
-    letter-spacing: -3px;
-    max-width: 900px;
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
-
-  .hero h1 em {
-    font-style: normal;
+  h1.hero-title .outline {
+    -webkit-text-stroke: 2px var(--text);
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    display: inline-block;
   }
-
-  .hero p {
+  .lead {
+    max-width: 600px;
+    color: var(--text-dim);
     font-size: 18px;
-    line-height: 1.7;
-    color: rgba(245,243,238,0.6);
-    max-width: 560px;
-    margin-bottom: 48px;
+    line-height: 1.55;
+    margin-bottom: 40px;
   }
-
-  .hero-cta {
+  .cta-row {
     display: flex;
-    gap: 16px;
     align-items: center;
+    gap: 28px;
     flex-wrap: wrap;
   }
-
   .btn-primary {
     background: var(--accent);
-    color: white;
-    padding: 14px 32px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
-    transition: all 0.2s;
+    color: #fff;
     border: none;
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-  }
-
-  .btn-primary:hover {
-    background: #ff1a3d;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 32px rgba(255,45,85,0.35);
-  }
-
-  .btn-secondary {
-    color: var(--text-muted);
     text-decoration: none;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.2s;
+    display: inline-block;
+    transition: transform 0.15s, background 0.15s;
   }
-
-  .btn-secondary:hover { color: var(--white); }
-
-  /* STATS */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .stat {
-    background: var(--black);
-    padding: 48px;
-    text-align: center;
-  }
-
-  .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 48px;
-    letter-spacing: -2px;
-    color: var(--white);
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .stat-number span { color: var(--accent); }
-
-  .stat-label {
-    font-size: 13px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* HOW IT WORKS */
-  .section {
-    padding: 120px 48px;
-  }
-
-  .section-label {
-    font-size: 11px;
+  .btn-primary:hover { background: #e6234a; transform: translateY(-1px); }
+  .link-secondary {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
+    border-bottom: 1px solid var(--text-dim);
+    padding-bottom: 2px;
+    transition: border-color 0.15s;
   }
+  .link-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: clamp(32px, 4vw, 52px);
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin-bottom: 64px;
-    max-width: 600px;
+  section {
+    padding: 100px 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-top: 1px solid var(--border);
   }
-
-  .flow {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .flow-step {
-    background: var(--gray);
-    padding: 40px 32px;
-    position: relative;
-    transition: background 0.3s;
-  }
-
-  .flow-step:hover { background: var(--gray2); }
-
-  .flow-number {
-    font-family: 'Syne', sans-serif;
+  h2 {
+    font-size: clamp(36px, 5vw, 56px);
     font-weight: 800;
-    font-size: 64px;
-    color: rgba(255,255,255,0.04);
-    position: absolute;
-    top: 16px; right: 24px;
-    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    line-height: 1.05;
+  }
+  .section-lead {
+    color: var(--text-dim);
+    font-size: 17px;
+    max-width: 640px;
+    margin-bottom: 56px;
   }
 
-  .flow-icon {
-    width: 40px; height: 40px;
-    background: rgba(255,45,85,0.12);
-    border: 1px solid rgba(255,45,85,0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 18px;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
   }
-
-  .flow-step h3 {
-    font-family: 'Syne', sans-serif;
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card-num {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-size: 20px;
     font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
   }
-
-  .flow-step p {
-    font-size: 13px;
-    color: var(--text-muted);
+  .card p {
+    color: var(--text-dim);
+    font-size: 15px;
     line-height: 1.6;
   }
 
-  /* FEATURES */
-  .features {
-    padding: 80px 48px 120px;
-    background: var(--gray);
-  }
-
-  .features-grid {
+  .who-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 64px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
   }
-
-  .feature-card {
-    background: var(--black);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 36px;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .feature-card:hover {
-    border-color: rgba(255,45,85,0.3);
-    transform: translateY(-4px);
-  }
-
-  .feature-icon {
-    font-size: 28px;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .feature-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-
-  .feature-card p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* INTEGRATION */
-  .integration {
-    padding: 120px 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .integration-visual {
-    background: var(--gray);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 40px;
-    position: relative;
-  }
-
-  .integration-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .stack-item {
-    background: var(--gray2);
-    border: 1px solid rgba(255,255,255,0.08);
+  .who-item {
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 14px;
-    font-weight: 400;
-    transition: border-color 0.3s;
+    padding: 24px;
   }
-
-  .stack-item:hover { border-color: rgba(0,212,255,0.3); }
-
-  .stack-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
+  .who-item strong {
+    color: var(--text);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
   }
+  .who-item span { color: var(--text-dim); font-size: 14.5px; }
 
-  .stack-arrow {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 18px;
-    padding: 4px 0;
-  }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
+  .integration-card {
+    background: linear-gradient(135deg, var(--surface), #1a1a1a);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 48px;
+    margin-top: 32px;
+  }
+  .integration-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .integration-card p { color: var(--text-dim); margin-bottom: 20px; }
+  .integration-card ul { margin-left: 20px; color: var(--text); }
+  .integration-card li { margin-bottom: 8px; }
+  .integration-card .note {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    max-width: 1280px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--text-dim);
+    font-size: 14px;
   }
-
-  footer p {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
   footer a {
-    color: var(--text-muted);
+    color: var(--text-dim);
     text-decoration: none;
-    font-size: 13px;
-    transition: color 0.2s;
+    margin-left: 24px;
+    transition: color 0.15s;
   }
+  footer a:hover { color: var(--accent); }
 
-  footer a:hover { color: var(--white); }
-
-  .footer-links {
-    display: flex;
-    gap: 24px;
-  }
-
-  /* ANIMATIONS */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(24px);
-    animation: fadeIn 0.8s forwards;
-  }
-
-  .fade-in:nth-child(2) { animation-delay: 0.1s; }
-  .fade-in:nth-child(3) { animation-delay: 0.2s; }
-  .fade-in:nth-child(4) { animation-delay: 0.3s; }
-
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 20px 24px; }
-    nav ul { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    .stats { grid-template-columns: 1fr; }
-    .section { padding: 80px 24px; }
-    .flow { grid-template-columns: 1fr 1fr; }
-    .features { padding: 60px 24px; }
-    .features-grid { grid-template-columns: 1fr; }
-    .integration { grid-template-columns: 1fr; padding: 80px 24px; }
-    footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
+  @media (max-width: 700px) {
+    header { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+    nav a { margin-left: 16px; }
+    .hero { padding: 60px 20px 80px; }
+    section { padding: 60px 20px; }
+    .integration-card { padding: 28px; }
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+    footer a { margin-left: 0; margin-right: 16px; display: inline-block; margin-top: 6px; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">Content<span>Manager</span>_Auto</div>
-  <ul>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#integration">Integration</a></li>
-  </ul>
-</nav>
+<header>
+  <div class="brand">ContentManager<span>_Auto</span></div>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#integration">Integration</a>
+  </nav>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-tag">Professional Content Platform</div>
-  <h1 class="fade-in">Automate Your<br><em>TikTok</em><br>Workflow</h1>
-  <p class="fade-in">ContentManager_Auto is a professional content orchestration platform designed for marketing teams and digital agencies to centralize their media assets and streamline TikTok publishing.</p>
-  <div class="hero-cta fade-in">
-    <a href="#how" class="btn-primary">See How It Works</a>
-    <a href="#integration" class="btn-secondary">View Integration →</a>
+<section class="hero" id="top">
+  <div class="tag">Professional Content Platform</div>
+  <h1 class="hero-title">
+    Automate<br>
+    Your <span class="outline">TikTok</span><br>
+    Workflow
+  </h1>
+  <p class="lead">
+    ContentManager_Auto is a professional content orchestration platform designed for marketing teams, digital agencies, and brands to centralize media assets and streamline TikTok publishing for their external clients and audiences.
+  </p>
+  <div class="cta-row">
+    <a class="btn-primary" href="#how">See How It Works</a>
+    <a class="link-secondary" href="#integration">View Integration →</a>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <span class="stat-number">100<span>%</span></span>
-    <span class="stat-label">Automated Publishing</span>
-  </div>
-  <div class="stat">
-    <span class="stat-number">3<span>x</span></span>
-    <span class="stat-label">Faster Content Distribution</span>
-  </div>
-  <div class="stat">
-    <span class="stat-number">24<span>/7</span></span>
-    <span class="stat-label">Continuous Operation</span>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-  <div class="section-label">Process</div>
-  <h2 class="section-title">From database to TikTok in seconds</h2>
-  <div class="flow">
-    <div class="flow-step">
-      <div class="flow-number">01</div>
-      <div class="flow-icon">🗄️</div>
-      <h3>Airtable CMS</h3>
-      <p>Team marks approved video content with "To TikTok" status in the centralized content database.</p>
+<section id="how">
+  <h2>How It Works</h2>
+  <p class="section-lead">A clear, audit-ready publishing pipeline from upload to live post — every step is initiated and authorized by the customer.</p>
+  <div class="grid">
+    <div class="card">
+      <div class="card-num">01</div>
+      <h3>Connect TikTok</h3>
+      <p>The customer authenticates their TikTok account via the official TikTok Login Kit and grants scoped publishing permissions through OAuth 2.0.</p>
     </div>
-    <div class="flow-step">
-      <div class="flow-number">02</div>
-      <div class="flow-icon">⚙️</div>
-      <h3>Automation Trigger</h3>
-      <p>Make.com detects the status change and initiates the automated publishing workflow.</p>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h3>Upload &amp; Organize</h3>
+      <p>Teams upload videos, captions, hashtags, and covers into a centralized asset library, and assign them to target accounts and schedules.</p>
     </div>
-    <div class="flow-step">
-      <div class="flow-number">03</div>
-      <div class="flow-icon">🚀</div>
-      <h3>TikTok API Upload</h3>
-      <p>Video is securely transmitted to TikTok via Content Posting API with all metadata.</p>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h3>Schedule &amp; Approve</h3>
+      <p>Reviewers approve drafts and set publication times. Every action is logged for compliance and audit.</p>
     </div>
-    <div class="flow-step">
-      <div class="flow-number">04</div>
-      <div class="flow-icon">✅</div>
-      <h3>Status Update</h3>
-      <p>Database is automatically updated to "Published" confirming successful delivery.</p>
+    <div class="card">
+      <div class="card-num">04</div>
+      <h3>Publish via TikTok API</h3>
+      <p>At the scheduled time, ContentManager_Auto delivers the content directly to TikTok via the official Content Posting API on behalf of the authorized account.</p>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="section-label">Capabilities</div>
-  <h2 class="section-title">Built for professional teams</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <span class="feature-icon">🔐</span>
-      <h3>Secure OAuth 2.0</h3>
-      <p>Full TikTok Login Kit integration with secure token management and automatic refresh for uninterrupted operation.</p>
+<section id="features">
+  <h2>Built for Professional Teams</h2>
+  <p class="section-lead">ContentManager_Auto is a SaaS platform for business customers who manage TikTok presence at scale for their external clients, brands, and audiences. It is not intended for personal or purely internal-only use.</p>
+
+  <div class="who-row">
+    <div class="who-item">
+      <strong>Marketing Agencies</strong>
+      <span>Manage TikTok publishing for multiple client brands from a single workspace.</span>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">📹</span>
-      <h3>Direct Video Publishing</h3>
-      <p>Leverages video.publish and video.upload scopes for seamless content delivery directly to authorized TikTok creator accounts.</p>
+    <div class="who-item">
+      <strong>In-house Brand Teams</strong>
+      <span>Coordinate campaigns across regional, product, or franchise accounts.</span>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">🗂️</span>
-      <h3>CMS Integration</h3>
-      <p>Deep Airtable integration serves as the human-verified content approval layer before any publishing occurs.</p>
+    <div class="who-item">
+      <strong>Content Studios</strong>
+      <span>Deliver scheduled, approval-gated video output for creator clients.</span>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔄</span>
-      <h3>Status Tracking</h3>
-      <p>Real-time publish status monitoring via TikTok API ensures every video is confirmed before marking complete.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">👥</span>
-      <h3>Team Workflow</h3>
-      <p>Designed for marketing teams — multiple team members can manage the content pipeline without technical knowledge.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <h3>High Efficiency</h3>
-      <p>Eliminates manual repetitive uploads and maintains consistent posting schedules across professional creator accounts.</p>
+    <div class="who-item">
+      <strong>Media Operations</strong>
+      <span>Centralize assets, approvals, and publishing logs across teams.</span>
     </div>
   </div>
 </section>
 
-<!-- INTEGRATION -->
-<section class="integration" id="integration">
-  <div>
-    <div class="section-label">Tech Stack</div>
-    <h2 class="section-title">Enterprise-grade integration architecture</h2>
-    <p style="color: var(--text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 24px;">ContentManager_Auto connects your content database directly to TikTok's ecosystem through a secure, automated pipeline. All content is triggered by human-verified status changes ensuring only approved, high-quality content is published.</p>
-    <a href="https://dungeonmaster337.github.io/tiktok-auth/privacy.html" style="color: var(--accent2); font-size: 14px; text-decoration: none;">Privacy Policy →</a>
-    <span style="color: var(--text-muted); margin: 0 12px;">|</span>
-    <a href="https://dungeonmaster337.github.io/tiktok-auth/terms.html" style="color: var(--accent2); font-size: 14px; text-decoration: none;">Terms of Service →</a>
-  </div>
-  <div class="integration-visual">
-    <div class="integration-stack">
-      <div class="stack-item">
-        <div class="stack-dot" style="background:#ffcc00"></div>
-        <span>Airtable — Content Database & Approval Layer</span>
-      </div>
-      <div class="stack-arrow">↓</div>
-      <div class="stack-item">
-        <div class="stack-dot" style="background:#a259ff"></div>
-        <span>Make.com — Automation Engine</span>
-      </div>
-      <div class="stack-arrow">↓</div>
-      <div class="stack-item">
-        <div class="stack-dot" style="background:#00d4ff"></div>
-        <span>Dropbox — Secure File Storage</span>
-      </div>
-      <div class="stack-arrow">↓</div>
-      <div class="stack-item">
-        <div class="stack-dot" style="background:#ff2d55"></div>
-        <span>TikTok Content Posting API</span>
-      </div>
-      <div class="stack-arrow">↓</div>
-      <div class="stack-item">
-        <div class="stack-dot" style="background:#00ff88"></div>
-        <span>TikTok Creator Account — Published ✓</span>
-      </div>
+<section id="integration">
+  <h2>TikTok Integration</h2>
+  <p class="section-lead">ContentManager_Auto integrates with TikTok through official, fully-supported developer products. We do not scrape, automate the consumer app, or use unofficial APIs.</p>
+
+  <div class="integration-card">
+    <h3>Official TikTok Developer Products Used</h3>
+    <p>The Service is built exclusively on TikTok's documented developer platform:</p>
+    <ul>
+      <li><strong>TikTok Login Kit</strong> — OAuth 2.0 authentication so the customer authorizes publishing access on their own TikTok account.</li>
+      <li><strong>Content Posting API</strong> — programmatic publishing of video content the customer has uploaded and approved.</li>
+      <li><strong>User Info API (basic scope)</strong> — to display the connected account name and avatar in the customer's workspace.</li>
+    </ul>
+    <div class="note">
+      ContentManager_Auto is not affiliated with, endorsed by, or sponsored by TikTok Ltd. or ByteDance Ltd. TikTok is a trademark of its respective owner.
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
+  <div>&copy; 2026 ContentManager_Auto · Contact: <a href="mailto:dungeonmaster337@gmail.com" style="margin-left: 4px;">dungeonmaster337@gmail.com</a></div>
   <div>
-    <div class="logo" style="margin-bottom: 8px;">Content<span style="color:var(--accent)">Manager</span>_Auto</div>
-    <p>Professional TikTok Content Orchestration Platform</p>
-  </div>
-  <div class="footer-links">
-    <a href="privacy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
   </div>
 </footer>
 
